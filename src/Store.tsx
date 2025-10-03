@@ -19,10 +19,8 @@ interface PokemonStore {
 
 export const usePokemonStore = create<PokemonStore>((set) => ({
   favourites: [],
-  filteredList: [],
   searchTerm: "",
   page: 1,
-  total: 0,
   limit: 20,
   currLink: `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`,
   pokemonType: "",

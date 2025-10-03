@@ -1,21 +1,40 @@
-import { Box, Button, CardMedia, Chip, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Chip,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 function InfoPage() {
   const { state }: any = useLocation();
   const pokemon = state?.pokemon;
-  const image = pokemon.sprites.other["official-artwork"].front_default;
+
+  if (!pokemon) {
+    return (
+      <Grid
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+      >
+        <Typography variant="h4">No information available...</Typography>
+        <Typography variant="h4">
+          Click on the card to get the information
+        </Typography>
+      </Grid>
+    );
+  }
+
+  const image = pokemon.sprites.other["showdown"].front_default;
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-      p={2}
-    >
+    <Box display="flex" justifyContent="center" minHeight="60vh" p={2}>
       <Paper
         sx={{
-          width: { xs: "95%", md: 900 },
+          width: { xs: "95%", md: 900, backgroundColor: "#ADBBDA" },
           p: 4,
           borderRadius: 4,
           boxShadow: 6,

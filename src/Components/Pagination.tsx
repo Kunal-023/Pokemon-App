@@ -1,7 +1,7 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { usePokemonStore } from "../Store";
+import { usePokemonStore } from "../store";
 
 type PaginationProps = {
   count: number;
@@ -18,11 +18,12 @@ function PaginationControlled({ count }: PaginationProps) {
     const offset = (value - 1) * limit;
     const newLink = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
     setCurrLink(newLink);
+    scrollTo(0,0);
   };
 
   return (
-    <Stack spacing={2}>
-      <Pagination count={count} page={page} onChange={handleChange} />
+    <Stack  direction="row" justifyContent='center' margin="20px">
+      <Pagination count={count} page={page} onChange={handleChange}/>
     </Stack>
   );
 }

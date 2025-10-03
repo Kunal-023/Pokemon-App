@@ -8,17 +8,19 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { usePokemonStore } from "../Store";
+import { Link, useLocation } from "react-router-dom";
+import { usePokemonStore } from "../store";
 
 function Header() {
   const searchTerm = usePokemonStore((state) => state.searchTerm);
   const setSearchTerm = usePokemonStore((state) => state.setSearchTerm);
   const pokemonType = usePokemonStore((state) => state.pokemonType);
   const setPokemonType = usePokemonStore((state) => state.setPokemonType);
+  const location = useLocation(); 
+  const isInfiniteScroll = location.pathname === "/infinitescroll";
 
   return (
-    <AppBar position="sticky" color="primary" elevation={4} sx={{ mb: 2 }}>
+    <AppBar position="sticky" elevation={4} sx={{ mb: 2 ,backgroundColor:"#3D52A0"}}>
       <Toolbar
         sx={{
           display: "flex",
@@ -44,9 +46,17 @@ function Header() {
           >
             Favourites
           </Button>
+          <Button
+            component={Link}
+            to="/infinitescroll"
+            color="inherit"
+            sx={{ textTransform: "none", fontWeight: "bold" }}
+          >
+            InfiniteScroll
+          </Button>
         </Box>
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             position: "absolute",
             left: "50%",
@@ -63,6 +73,7 @@ function Header() {
             size="small"
             placeholder="Search Pokémon"
             value={searchTerm}
+            disabled={isInfiniteScroll}
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
@@ -81,6 +92,7 @@ function Header() {
               borderRadius: 1,
             }}
             value={pokemonType}
+            disabled={isInfiniteScroll}
             onChange={(e) => {
               setPokemonType(e.target.value);
             }}

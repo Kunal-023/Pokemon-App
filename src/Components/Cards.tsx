@@ -7,9 +7,9 @@ import {
   IconButton,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { usePokemonStore } from "../Store";
+import { usePokemonStore } from "../store";
 import { useNavigate } from "react-router-dom";
-import PokemonCardSkeleton from "./CardSkeleton";
+import PokemonCardSkeleton from "./cardSkeleton";
 
 function Cards({ details }: any) {
   const favourites = usePokemonStore((state) => state.favourites);
@@ -25,9 +25,10 @@ function Cards({ details }: any) {
   return details ? (
     <Paper
       onClick={() => {
-        navigate(`/pokemoninfo`, { state: { pokemon: details } });
+        navigate(`/infopage`, {state: { pokemon: details } });
       }}
       sx={{
+        backgroundColor:"#ADBBDA",
         width: 250,
         height: 330,
         textAlign: "center",
@@ -51,14 +52,14 @@ function Cards({ details }: any) {
         sx={{
           top: 1,
           left: 100,
-          color: fav ? "red" : "grey",
+          color: fav ? "red" : "white",
         }}
       >
         <FavoriteIcon />
       </IconButton>
       <CardMedia
         component="img"
-        image={details?.sprites?.other["official-artwork"].front_default}
+        image={details?.sprites?.other["showdown"].front_default}
         alt={details.name}
         sx={{ height: 150, objectFit: "contain", mb: 1 }}
       />

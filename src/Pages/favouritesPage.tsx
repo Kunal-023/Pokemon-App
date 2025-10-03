@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-import Header from "../Components/Header";
-import { usePokemonStore } from "../Store";
-import Cards from "../Components/Cards";
+import { usePokemonStore } from "../store";
+import Cards from "../components/cards";
 
 function Favourites() {
   const FavList = usePokemonStore((state) => state.favourites);
@@ -10,7 +9,6 @@ function Favourites() {
 
   return (
     <>
-      <Header />
       {FavList.length === 0 ? (
         <Typography
           variant="h4"
@@ -18,8 +16,6 @@ function Favourites() {
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%) translateY(50%)",
-            fontWeight: "bold",
-            letterSpacing: 1,
           }}
         >
           No Favrouites Selected...

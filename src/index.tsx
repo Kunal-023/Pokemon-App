@@ -2,34 +2,45 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient,QueryClientProvider } from "@tanstack/react-query";
 import {createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./Pages/ErrorPage";
-import HomePage from "./Pages/HomePage";
-import Favourites from "./Pages/Favourites";
-import InfoPage from "./Pages/InfoPage";
+import ErrorPage from "./pages/errorPage";
+import HomePage from "./pages/homePage";
+import Favourites from "./pages/favouritesPage";
+import InfoPage from "./pages/infoPage";
+import InfiniteScroll from "./pages/infiniteScrollPage";
+import App from "./App";
 
 const client=new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element : <HomePage/>,
-    errorElement: <ErrorPage/>
+    path: "/",
+    element: <App/>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "favourites",
+        element: <Favourites />,
+      },
+      {
+        path: "infinitescroll",
+        element: <InfiniteScroll />,
+      },
+      {
+        path: "infopage",
+        element: <InfoPage />,
+      },
+    ],
   },
   {
-    path:"/favourites",
-    element : <Favourites/>,
-    errorElement: <ErrorPage/>
-  },
-  {
-    path:'/pokemoninfo',
-    element : <InfoPage/>,
-    errorElement : <ErrorPage/>
-  },
-  {
-    path:'/*',
-    element : <ErrorPage/>
+    path: '*',
+    element: <ErrorPage />
   }
 ]);
+
 
 const root=createRoot(document.getElementById('root') as HTMLElement);
 root.render(
